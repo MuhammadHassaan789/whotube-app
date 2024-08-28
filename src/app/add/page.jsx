@@ -16,10 +16,25 @@ function AddVideo() {
         setLinks(newLinks);
     };
 
-    const handleSubmit = () => {
-        // You would save the links or navigate to the Home component with these links
-        // For now, let's navigate to the home page
-        router.push({ pathname: '/', query: { links: JSON.stringify(links) } });
+    const handleSubmit = async () => {
+        const validLinks = links.filter(link => link !== '');
+
+        if (validLinks.length === 0) {
+            alert("Please add at least one valid video link.");
+            return;
+        }
+
+        // Save the new playlist to the backend
+        await fetch('http://localhost:5000/api/videos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ links: validLinks }),
+        });
+
+        // Navigate to the home page
+        router.push('/');
     };
 
     return (
@@ -30,7 +45,7 @@ function AddVideo() {
             <div className="flex flex-col justify-center items-center h-screen">
                 <div className="mb-4">
                     <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-                        Add Embed Link Here!
+                        Add New Playlist
                     </h2>
                 </div>
                 {links.map((link, index) => (
@@ -44,7 +59,7 @@ function AddVideo() {
                     </div>
                 ))}
                 <div className="flex w-full max-w-sm justify-center space-x-2 p-2">
-                    <Button onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleSubmit}>Submit New Playlist</Button>
                 </div>
             </div>
         </main>
@@ -52,3 +67,4 @@ function AddVideo() {
 }
 
 export default AddVideo;
+
