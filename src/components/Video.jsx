@@ -61,7 +61,7 @@ const Video = ({ src, isPlaying, onPlay, onTimestamp }) => {
     const timestamp = new Date(currentTime * 1000).toISOString().substr(11, 8);
 
     try {
-      await fetch('http://localhost:5000/api/notes', {
+      await fetch('https://whotube-backend-production.up.railway.app/api/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

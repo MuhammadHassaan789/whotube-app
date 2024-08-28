@@ -25,7 +25,7 @@ function AddVideo() {
         }
 
         // Save the new playlist to the backend
-        await fetch('http://localhost:5000/api/videos', {
+        await fetch('https://whotube-backend-production.up.railway.app/api/videos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

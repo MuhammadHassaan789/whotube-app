@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/videos');
+        const response = await fetch('https://whotube-backend-production.up.railway.app/api/videos');
         const data = await response.json();
         if (data.length > 0) {
           setVideoLinks(data[0].links);
@@ -26,7 +26,7 @@ export default function Home() {
 
     const fetchNotes = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/notes');
+        const response = await fetch('https://whotube-backend-production.up.railway.app/api/notes');
         const data = await response.json();
         setNotes(data);
       } catch (error) {
@@ -40,7 +40,7 @@ export default function Home() {
 
   const fetchDescription = async (url) => {
     try {
-      const response = await fetch('http://localhost:5000/api/video-description', {
+      const response = await fetch('https://whotube-backend-production.up.railway.app/api/video-description', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
